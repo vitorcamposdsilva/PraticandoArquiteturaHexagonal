@@ -1,17 +1,17 @@
 package com.vitorcamposdsilva.hexagonal.application.core.doman;
 
-public class Customer {
+public class Cliente {
     private String id;
     private String nome;
     private Endereco endereco;
     private String cpf;
     private Boolean validaCpf;
 
-    public Customer() {
+    public Cliente() {
         this.validaCpf = false;
     }
 
-    public Customer(String id, String nome, Endereco endereco, String cpf, Boolean validaCpf) {
+    public Cliente(String id, String nome, Endereco endereco, String cpf, Boolean validaCpf) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
