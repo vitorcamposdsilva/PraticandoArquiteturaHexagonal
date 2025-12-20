@@ -1,7 +1,7 @@
 package com.vitorcamposdsilva.hexagonal.adapter.input.controller.mapper;
 
 import com.vitorcamposdsilva.hexagonal.adapter.input.controller.request.ClienteRequest;
-import com.vitorcamposdsilva.hexagonal.application.core.doman.Cliente;
+import com.vitorcamposdsilva.hexagonal.application.core.domain.Cliente;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,4 +1,4 @@
-package com.vitorcamposdsilva.hexagonal.application.core.doman;
+package com.vitorcamposdsilva.hexagonal.application.core.domain;
 
 public class Cliente {
     private String id;

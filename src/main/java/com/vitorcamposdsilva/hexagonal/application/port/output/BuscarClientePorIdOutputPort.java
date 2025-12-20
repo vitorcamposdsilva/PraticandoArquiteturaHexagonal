@@ -2,7 +2,9 @@ package com.vitorcamposdsilva.hexagonal.application.port.output;
 
 import com.vitorcamposdsilva.hexagonal.application.core.domain.Cliente;
 
-public interface CadastrarClienteOutputPort {
+import java.util.Optional;
 
-    void cadastrarCliente(Cliente cliente);
+public interface BuscarClientePorIdOutputPort {
+
+    Optional<Cliente> find(String id);
 }

@@ -1,6 +1,6 @@
 package com.vitorcamposdsilva.hexagonal.application.core.usecase;
 
-import com.vitorcamposdsilva.hexagonal.application.core.doman.Cliente;
+import com.vitorcamposdsilva.hexagonal.application.core.domain.Cliente;
 import com.vitorcamposdsilva.hexagonal.application.port.input.CadastrarClienteInputPort;
 import com.vitorcamposdsilva.hexagonal.application.port.output.BuscarEnderecoPorCepOutputPort;
 import com.vitorcamposdsilva.hexagonal.application.port.output.CadastrarClienteOutputPort;
