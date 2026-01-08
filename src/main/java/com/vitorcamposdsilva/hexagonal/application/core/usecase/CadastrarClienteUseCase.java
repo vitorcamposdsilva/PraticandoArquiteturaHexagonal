@@ -15,7 +15,7 @@ public class CadastrarClienteUseCase implements CadastrarClienteInputPort {
     }
     @Override
     public void cadastrarCliente(Cliente cliente, String cep){
-        var endereco = buscarEnderecoPorCepOutputPort.find(cep);
+        var endereco = buscarEnderecoPorCepOutputPort.buscarPorCep(cep);
         cliente.setEndereco(endereco);
         cadastrarClienteOutputPort.cadastrarCliente(cliente);
     }
