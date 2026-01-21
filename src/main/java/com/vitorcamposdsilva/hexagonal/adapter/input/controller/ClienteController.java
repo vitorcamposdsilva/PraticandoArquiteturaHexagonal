@@ -7,6 +7,7 @@ import com.vitorcamposdsilva.hexagonal.adapter.input.controller.respose.ClienteR
 import com.vitorcamposdsilva.hexagonal.application.core.domain.Cliente;
 import com.vitorcamposdsilva.hexagonal.application.port.input.AtualizarDadosClienteInputPort;
 import com.vitorcamposdsilva.hexagonal.application.port.input.CadastrarClienteInputPort;
+import com.vitorcamposdsilva.hexagonal.application.port.input.DeletarClientePorIdInputPort;
 import com.vitorcamposdsilva.hexagonal.application.port.output.BuscarClientePorIdOutputPort;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class ClienteController {
     @Autowired
     private AtualizarDadosClienteInputPort atualizarDadosClienteInputPort;
 
+    @Autowired
+    private DeletarClientePorIdInputPort deletarClientePorIdInputPort;
+
     @PostMapping
     public ResponseEntity<Void> cadastrarCliente(@Valid @RequestBody ClienteRequest clienteRequest){
         var cliente = mapper.toCliente(clienteRequest);
@@ -48,6 +52,12 @@ public class ClienteController {
         Cliente cliente = mapper.toCliente(clienteRequest);
         cliente.setId(id);
         atualizarDadosClienteInputPort.atualizar(cliente,clienteRequest.getCep());
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPorId(@PathVariable final String id){
+        deletarClientePorIdInputPort.deletar(id);
         return ResponseEntity.noContent().build();
     }
 }
