@@ -4,29 +4,30 @@ import com.vitorcamposdsilva.hexagonal.adapter.input.controller.mapper.ClienteMa
 import com.vitorcamposdsilva.hexagonal.adapter.input.controller.request.ClienteRequest;
 
 import com.vitorcamposdsilva.hexagonal.adapter.input.controller.respose.ClienteRespose;
+import com.vitorcamposdsilva.hexagonal.application.core.domain.Cliente;
+import com.vitorcamposdsilva.hexagonal.application.port.input.AtualizarDadosClienteInputPort;
 import com.vitorcamposdsilva.hexagonal.application.port.input.CadastrarClienteInputPort;
 import com.vitorcamposdsilva.hexagonal.application.port.output.BuscarClientePorIdOutputPort;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/clientes")
 public class ClienteController {
-    @Autowired
-    CadastrarClienteInputPort cadastrarClienteInputPort;
 
     @Autowired
-    ClienteMapper mapper;
+    private CadastrarClienteInputPort cadastrarClienteInputPort;
 
     @Autowired
-    BuscarClientePorIdOutputPort buscarClientePorIdOutputPort;
+    private ClienteMapper mapper;
+
+    @Autowired
+    private BuscarClientePorIdOutputPort buscarClientePorIdOutputPort;
+
+    @Autowired
+    private AtualizarDadosClienteInputPort atualizarDadosClienteInputPort;
 
     @PostMapping
     public ResponseEntity<Void> cadastrarCliente(@Valid @RequestBody ClienteRequest clienteRequest){
@@ -42,4 +43,11 @@ public class ClienteController {
         return ResponseEntity.ok().body(clienteResponse);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atualizarPorId(@PathVariable final String id, @Valid @RequestBody ClienteRequest clienteRequest){
+        Cliente cliente = mapper.toCliente(clienteRequest);
+        cliente.setId(id);
+        atualizarDadosClienteInputPort.atualizar(cliente,clienteRequest.getCep());
+        return ResponseEntity.noContent().build();
+    }
 }
